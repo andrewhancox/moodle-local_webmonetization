@@ -41,26 +41,8 @@ class contextpaymentpointerform extends persistent {
         $mform->addElement('hidden', 'contextid');
         $mform->setType('contextid', PARAM_INT);
 
-        $mform->addElement('text', 'paymentpointer', get_string('paymentpointer', 'local_webmonetization'));
+        $mform->addElement('text', 'paymentpointer', get_string('paymentpointer', 'local_webmonetization'), ['size' => 25]);
 
         $this->add_action_buttons();
-    }
-
-    /**
-     * Extra validation.
-     *
-     * @param  stdClass $data Data to validate.
-     * @param  array $files Array of files.
-     * @param  array $errors Currently reported errors.
-     * @return array of additional errors, or overridden errors.
-     */
-    protected function extra_validation($data, $files, array &$errors) {
-        /*$newerrors = array();
-        // Move the error from scaleconfiguration to the form element scale ID.
-        if (isset($errors['scaleconfiguration']) && !isset($errors['scaleid'])) {
-            $newerrors['scaleid'] = $errors['scaleconfiguration'];
-            unset($errors['scaleconfiguration']);
-        }
-        return $newerrors;*/
     }
 }

@@ -26,8 +26,13 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+$string['enable'] = 'Enable';
+$string['enable_desc'] = 'Embed payment pointers on pages where one exists in the current context or one of it\'s parent contexts';
 $string['managepaymentpointer'] = 'Manage payment pointer';
 $string['managepaymentpointerincontext'] = 'Manage payment pointer: {$a->contextname}';
+$string['monetizationsettings'] = 'Web monetization';
 $string['paymentpointer'] = 'Payment pointer';
 $string['pluginname'] = 'Web monetization';
+$string['systempaymentpointer'] = 'Default payment pointer';
+$string['systempaymentpointer_desc'] = 'This payment pointer will be set at the system context.';
 $string['webmonetization:managepaymentpointers'] = 'Manage payment pointers';

@@ -40,15 +40,57 @@ function local_webmonetization_before_standard_html_head() {
     return $output;
 }
 
+function local_webmonetization_update_systempaymentpointer() {
+    $systempointer = get_config('local_webmonetization', 'systempaymentpointer');
+    $systemcontext = context_system::instance();
+    $currentpointer = contextpaymentpointer::get_record(['contextid' => $systemcontext->id]);
+
+    if (empty($systempointer)) {
+        if ($currentpointer) {
+            $currentpointer->delete();
+        }
+    } else {
+        if (!$currentpointer) {
+            $currentpointer = new contextpaymentpointer();
+        }
+        $currentpointer->set('contextid', $systemcontext->id);
+        $currentpointer->set('paymentpointer', $systempointer);
+        if (empty($currentpointer->get('id'))) {
+            $currentpointer->create();
+        } else {
+            $currentpointer->update();
+        }
+    }
+}
+
 /**
- * Display the editcontextpaymentpointer link in the course administration menu.
+ * Display the editcontextpaymentpointer link in the administration menus.
  *
- * @param settings_navigation $parentnode The settings navigation object
- * @param stdClass $course The course
- * @param context_course $context Course context
+ * @param settings_navigation $nav The settings navigation object
+ * @param context $context Context
  */
-function local_webmonetization_extend_navigation_course($parentnode, $course, $context) {
-    $parentnode->add(
+function local_webmonetization_extend_settings_navigation(settings_navigation $nav, context $context) {
+    if (!has_capability('local/webmonetization:managepaymentpointers', $context)) {
+        return;
+    }
+
+    switch ($context->contextlevel) {
+        case CONTEXT_MODULE:
+            $navigation_node = $nav->get('modulesettings');
+            break;
+        case CONTEXT_COURSE:
+            $navigation_node = $nav->get('courseadmin');
+            break;
+        case CONTEXT_COURSECAT:
+            $navigation_node = $nav->get('categorysettings');
+            break;
+    }
+
+    if (!isset($navigation_node)) {
+        return;
+    }
+
+    $navigation_node->add(
             get_string('managepaymentpointer', 'local_webmonetization'),
             new \moodle_url('/local/webmonetization/editcontextpaymentpointer.php', ['contextid' => $context->id]),
             navigation_node::TYPE_CUSTOM,

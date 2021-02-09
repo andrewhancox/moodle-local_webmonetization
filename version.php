@@ -26,7 +26,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2021012500;
+$plugin->version   = 2021012503;
 $plugin->requires  = 2020061503; // Moodle 2.9.
 $plugin->component = 'local_webmonetization';
 $plugin->maturity  = MATURITY_ALPHA;

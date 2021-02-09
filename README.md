@@ -11,7 +11,16 @@ In order to use this plugin
 1. Create a digital wallet and make a note of your payment pointer, there is a guide to doing this here: [Digital Wallet and Payment Pointers](https://webmonetization.org/docs/ilp-wallets)
 2. [Install Moodle](https://docs.moodle.org/310/en/Installing_Moodle)
 3. [Install this plugin into your Moodle site](https://docs.moodle.org/en/Installing_plugins#Installing_a_plugin). This plugin should be placed in the local/webmonetization directory in the root of your Moodle site.
-4. Navigate to a Moodle course when logged in as a user with the 'local/webmonetization:managepaymentpointers' capability, in the navigation menu there will be a link "Manage payment pointer", follow this link and enter your payment pointer.
+4. Navigate to Site administration > Plugins > Local plugins > Web monetization, check the enable box and click save.
+5. Set up payment pointers throughout the site, you can do this in to ways:
+        
+    At a system level (thought the site administration link you visisted above)
+    
+    By navigating to a Moodle category, course or course module, in the navigation menu there will be a link "Manage payment pointer", follow this link and enter your payment pointer.
+    
+    You will need the 'local/webmonetization:managepaymentpointers' capability in the context that you wish to set the pointer.
+    
+Once you have done this Moodle will include the payment pointer for the context of the current page or it's nearest parent, e.g. a screen within an activity will look for payment pointers in the activity (course module), course, course category and then the system context and use the nearest one it finds.
 
 ### Set up as a content consumer
 In order to send payments to a site using that has this plugin installed you will need to:
@@ -21,11 +30,12 @@ In order to send payments to a site using that has this plugin installed you wil
 Signing up with [Coil](https://coil.com/) and installing one of their desktop browser extensions or their mobile puma browser is currently the easiest way to do this.
 
 ## TODO:
-- [ ] https://webmonetization.org/docs/receipt-verifier
+- [ ] https://webmonetization.org/docs/receipt-verifier - https://github.com/coilhq/receipt-verifier
 - [ ] https://webmonetization.org/docs/start-stop
 - [ ] https://webmonetization.org/docs/counter
 - [ ] Block access if no receipt
-- [ ] Extend to system and course module contexts
+- [x] Extend to system and course module contexts
+- [ ] Get listed https://help.coil.com/docs/monetize/content/platforms
 
 Author
 ------
