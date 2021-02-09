@@ -22,6 +22,8 @@ In order to use this plugin
     
 Once you have done this Moodle will include the payment pointer for the context of the current page or it's nearest parent, e.g. a screen within an activity will look for payment pointers in the activity (course module), course, course category and then the system context and use the nearest one it finds.
 
+You can see a Moodle site with the plugin installed and configured by going to Open Source Learning's example site [OSL Example site](https://examplesite.opensourcelearning.co.uk)
+
 ### Set up as a content consumer
 In order to send payments to a site using that has this plugin installed you will need to:
 1. Have an account or subscription with a Web Monetization provider (also known as a WM sender).
@@ -52,6 +54,7 @@ Useful links
 * [Open Source Learning](https://opensourcelearning.co.uk)
 * [Bug tracker](https://github.com/mudrd8mz/moodle-mod_subcourse/issues)
 * [Grant for the Web](https://www.grantfortheweb.org)
+* [OSL Example site](https://examplesite.opensourcelearning.co.uk)
 
 License
 -------
