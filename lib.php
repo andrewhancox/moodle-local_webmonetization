@@ -30,6 +30,11 @@ defined('MOODLE_INTERNAL') || die();
 
 function local_webmonetization_before_standard_html_head() {
     global $PAGE;
+
+    if (empty(get_config('local_webmonetization', 'enable'))) {
+        return '';
+    }
+
     $paymentpointer = contextpaymentpointer::nearest_paymentpointer($PAGE->context);
 
     if (!$paymentpointer) {
