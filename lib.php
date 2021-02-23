@@ -91,7 +91,7 @@ function local_webmonetization_extend_settings_navigation(settings_navigation $n
             break;
     }
 
-    if (!isset($navigation_node)) {
+    if (empty($navigation_node)) {
         return;
     }
 
