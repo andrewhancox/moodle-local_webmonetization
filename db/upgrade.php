@@ -24,26 +24,25 @@
  * @copyright 2021, Andrew Hancox
  */
 
-namespace local_webmonetization;
+function xmldb_local_webmonetization_upgrade($oldversion) {
+    global $CFG, $DB;
 
-defined('MOODLE_INTERNAL') || die();
+    $result = true;
+    $dbman = $DB->get_manager();
 
-use core\form\persistent;
-
-class contextpaymentpointerform extends persistent {
-
-    /** @var string Persistent class name. */
-    protected static $persistentclass = 'local_webmonetization\\contextpaymentpointer';
-
-    public function definition() {
-        $mform = $this->_form;
-
-        $mform->addElement('hidden', 'contextid');
-        $mform->setType('contextid', PARAM_INT);
-
-        $mform->addElement('advcheckbox', 'forcepayment', get_string('forcepayment', 'local_webmonetization'), get_string('forcepayment_desc', 'local_webmonetization'));
-        $mform->addElement('text', 'paymentpointer', get_string('paymentpointer', 'local_webmonetization'), ['size' => 25]);
-
-        $this->add_action_buttons();
+    if ($oldversion < 2021012506) {
+        set_config('receiptseed', base64_encode(random_bytes(32)), 'local_webmonetization');
+        upgrade_plugin_savepoint(true, 2021012506, 'local', 'webmonetization');
     }
+
+    if ($oldversion < 2021012507) {
+        $table = new xmldb_table('local_wm_ctxpaymentpointer');
+        $field = new xmldb_field('forcepayment', XMLDB_TYPE_INTEGER, '1', null, XMLDB_NOTNULL, 0, 0);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        upgrade_plugin_savepoint(true, 2021012507, 'local', 'webmonetization');
+    }
+
+    return $result;
 }

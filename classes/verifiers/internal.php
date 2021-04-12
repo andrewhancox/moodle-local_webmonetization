@@ -24,26 +24,27 @@
  * @copyright 2021, Andrew Hancox
  */
 
-namespace local_webmonetization;
+namespace local_webmonetization\verifiers;
+
+use local_webmonetization\receiptverifier;
+use moodle_url;
 
 defined('MOODLE_INTERNAL') || die();
 
-use core\form\persistent;
+class internal extends receiptverifier {
+    protected function verifyhmac($binaryreceipt): bool {
+        global $CFG;
 
-class contextpaymentpointerform extends persistent {
+        require_once("$CFG->dirroot/local/webmonetization/lib/interledgerphp/autoload.php");
+        $receipthandler = new \interledgerphp\receipthandler(
+                get_config('local_webmonetization', 'receiptseed')
+        );
 
-    /** @var string Persistent class name. */
-    protected static $persistentclass = 'local_webmonetization\\contextpaymentpointer';
+        return $receipthandler->verify_hmac($binaryreceipt);
+    }
 
-    public function definition() {
-        $mform = $this->_form;
-
-        $mform->addElement('hidden', 'contextid');
-        $mform->setType('contextid', PARAM_INT);
-
-        $mform->addElement('advcheckbox', 'forcepayment', get_string('forcepayment', 'local_webmonetization'), get_string('forcepayment_desc', 'local_webmonetization'));
-        $mform->addElement('text', 'paymentpointer', get_string('paymentpointer', 'local_webmonetization'), ['size' => 25]);
-
-        $this->add_action_buttons();
+    public function gethandler($paymentpointer): string {
+        $url = new moodle_url("/local/webmonetization/handlers/receiptverifierproxy.php", ['paymentpointer' => $paymentpointer]);
+        return $url->out(false);
     }
 }

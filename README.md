@@ -32,11 +32,11 @@ In order to send payments to a site using that has this plugin installed you wil
 Signing up with [Coil](https://coil.com/) and installing one of their desktop browser extensions or their mobile puma browser is currently the easiest way to do this.
 
 ## TODO:
-- [ ] https://webmonetization.org/docs/receipt-verifier - https://github.com/coilhq/receipt-verifier
-- [ ] https://webmonetization.org/docs/start-stop
-- [ ] https://webmonetization.org/docs/counter
-- [ ] Block access if no receipt
+- [x] https://webmonetization.org/docs/receipt-verifier - https://github.com/coilhq/receipt-verifier
+- [x] Block access if no receipt
 - [x] Extend to system and course module contexts
+- [ ] Build proper interstitial and failed pages
+- [ ] Documentation
 - [ ] Get listed https://help.coil.com/docs/monetize/content/platforms
 
 Author
@@ -52,7 +52,7 @@ Useful links
 * [Moodle](https://moodle.org/)
 * [Coil](https://coil.com/)
 * [Open Source Learning](https://opensourcelearning.co.uk)
-* [Bug tracker](https://github.com/mudrd8mz/moodle-mod_subcourse/issues)
+* [Bug tracker](https://github.com/andrewhancox/moodle-local_webmonetization/issues)
 * [Grant for the Web](https://www.grantfortheweb.org)
 * [OSL Example site](https://examplesite.opensourcelearning.co.uk)
 

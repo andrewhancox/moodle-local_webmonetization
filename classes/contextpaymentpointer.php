@@ -40,6 +40,10 @@ class contextpaymentpointer extends persistent {
                         'type'        => PARAM_INT,
                         'description' => 'Context to use payment pointer',
                 ],
+                'forcepayment'      => [
+                        'type'        => PARAM_BOOL,
+                        'description' => 'Context to use payment pointer',
+                ],
                 'paymentpointer' => [
                         'type'        => PARAM_TEXT,
                         'description' => 'Payment pointer',
@@ -62,7 +66,6 @@ class contextpaymentpointer extends persistent {
             return false;
         }
 
-        $pointer = reset($pointers);
-        return $pointer->get('paymentpointer');
+        return reset($pointers);
     }
 }

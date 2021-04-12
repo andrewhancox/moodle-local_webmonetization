@@ -25,6 +25,7 @@
  */
 
 use local_webmonetization\contextpaymentpointer;
+use local_webmonetization\receiptverifier;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -35,18 +36,50 @@ function local_webmonetization_before_standard_html_head() {
         return '';
     }
 
+    $monetizationsetuppage = in_array($PAGE->url->get_path(), [
+            '/local/webmonetization/failed.php',
+            '/local/webmonetization/interstitial.php'
+    ]);
+
     $paymentpointer = contextpaymentpointer::nearest_paymentpointer($PAGE->context);
 
     if (!$paymentpointer) {
         return '';
     }
 
-    $output = '<meta name="monetization" content="' . $paymentpointer . '">';
+    $pointeraddress = $paymentpointer->get('paymentpointer');
+
+    $verifier = receiptverifier::get_receiptverifier();
+    if (isset($verifier)) {
+        $pointeraddress = $verifier->gethandler($pointeraddress);
+        $forcepayment =
+                !empty($paymentpointer->get('forcepayment'))
+                &&
+                !has_capability('local/webmonetization:ignoreforcepayment', $PAGE->context);
+
+        $lastverificationresult = receiptverifier::get_lastsessionverificationresult();
+        if (!$monetizationsetuppage && $forcepayment && !isset($lastverificationresult)) {
+            redirect(new moodle_url('/local/webmonetization/interstitial.php', ['contextid' => $PAGE->context->id]));
+        } else if (!$monetizationsetuppage && $forcepayment && $lastverificationresult == false) {
+            redirect(new moodle_url('/local/webmonetization/failed.php', ['contextid' => $PAGE->context->id]));
+        }
+
+        $jsparams = ['requiremonetization' => $forcepayment];
+
+        if ($monetizationsetuppage) {
+            $jsparams['wantsurl'] = $PAGE->context->get_url()->out();
+        }
+
+        $PAGE->requires->js_call_amd('local_webmonetization/handlereceipts', 'init', $jsparams);
+    }
+
+    $output = "<meta name='monetization' content='$pointeraddress'>";
     return $output;
 }
 
 function local_webmonetization_update_systempaymentpointer() {
     $systempointer = get_config('local_webmonetization', 'systempaymentpointer');
+    $systemforcepayment = !empty(get_config('local_webmonetization', 'systemforcepayment'));
     $systemcontext = context_system::instance();
     $currentpointer = contextpaymentpointer::get_record(['contextid' => $systemcontext->id]);
 
@@ -60,6 +93,7 @@ function local_webmonetization_update_systempaymentpointer() {
         }
         $currentpointer->set('contextid', $systemcontext->id);
         $currentpointer->set('paymentpointer', $systempointer);
+        $currentpointer->set('forcepayment', $systemforcepayment);
         if (empty($currentpointer->get('id'))) {
             $currentpointer->create();
         } else {

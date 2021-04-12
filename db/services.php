@@ -24,26 +24,12 @@
  * @copyright 2021, Andrew Hancox
  */
 
-namespace local_webmonetization;
-
-defined('MOODLE_INTERNAL') || die();
-
-use core\form\persistent;
-
-class contextpaymentpointerform extends persistent {
-
-    /** @var string Persistent class name. */
-    protected static $persistentclass = 'local_webmonetization\\contextpaymentpointer';
-
-    public function definition() {
-        $mform = $this->_form;
-
-        $mform->addElement('hidden', 'contextid');
-        $mform->setType('contextid', PARAM_INT);
-
-        $mform->addElement('advcheckbox', 'forcepayment', get_string('forcepayment', 'local_webmonetization'), get_string('forcepayment_desc', 'local_webmonetization'));
-        $mform->addElement('text', 'paymentpointer', get_string('paymentpointer', 'local_webmonetization'), ['size' => 25]);
-
-        $this->add_action_buttons();
-    }
-}
+$functions = [
+    'local_webmonetization_handlereceipt' => [
+        'classname'    => 'local_webmonetization\external',
+        'methodname'   => 'handlereceipt',
+        'type'         => 'read',
+        'ajax'         => true,
+        'loginrequired' => false,
+    ],
+];

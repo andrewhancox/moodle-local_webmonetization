@@ -24,26 +24,40 @@
  * @copyright 2021, Andrew Hancox
  */
 
-namespace local_webmonetization;
+namespace local_webmonetization\verifiers;
+
+use curl;
+use local_webmonetization\receiptverifier;
 
 defined('MOODLE_INTERNAL') || die();
 
-use core\form\persistent;
+class external extends receiptverifier {
+    public function verifyhmac($binreceipt): bool {
+        global $CFG;
 
-class contextpaymentpointerform extends persistent {
+        require_once("$CFG->dirroot/lib/filelib.php");
+        $receiptverifier = get_config('local_webmonetization', 'externalreceiptverifierverifyendpoint');
 
-    /** @var string Persistent class name. */
-    protected static $persistentclass = 'local_webmonetization\\contextpaymentpointer';
+        if (empty($receiptverifier)) {
+            return false;
+        }
+        $curl = new curl();
 
-    public function definition() {
-        $mform = $this->_form;
+        try {
+            $rawreceipt = $curl->post($receiptverifier, base64_encode($binreceipt));
+        } catch (\Exception $exception) {
+            return false;
+        }
 
-        $mform->addElement('hidden', 'contextid');
-        $mform->setType('contextid', PARAM_INT);
+        $receipt = json_decode($rawreceipt);
+        if (!isset($receipt->amount)) {
+            return false;
+        }
 
-        $mform->addElement('advcheckbox', 'forcepayment', get_string('forcepayment', 'local_webmonetization'), get_string('forcepayment_desc', 'local_webmonetization'));
-        $mform->addElement('text', 'paymentpointer', get_string('paymentpointer', 'local_webmonetization'), ['size' => 25]);
+        return true;
+    }
 
-        $this->add_action_buttons();
+    public function gethandler($paymentpointer): string {
+        return get_config('local_webmonetization', 'externalreceiptverifier') . urlencode($paymentpointer);
     }
 }

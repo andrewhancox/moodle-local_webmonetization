@@ -26,13 +26,27 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+$string['cachedef_paymentstreams'] = 'Payment streams';
 $string['enable'] = 'Enable';
 $string['enable_desc'] = 'Embed payment pointers on pages where one exists in the current context or one of it\'s parent contexts';
+$string['external'] = 'External';
+$string['externalreceiptverifier'] = 'External receipt verifier';
+$string['externalreceiptverifier_desc'] = 'External receipt verifier e.g. $webmonetization.org/api/receipts/';
+$string['externalreceiptverifierverifyendpoint'] = 'Verify endpoint';
+$string['externalreceiptverifierverifyendpoint_desc'] = 'Verify end point e.g. https://webmonetization.org/api/receipts/verify';
+$string['forcepayment'] = 'Force payment';
+$string['forcepayment_desc'] = 'Require the user to be using a web monetized browser.';
+$string['internal'] = 'Internal';
 $string['managepaymentpointer'] = 'Manage payment pointer';
 $string['managepaymentpointerincontext'] = 'Manage payment pointer: {$a->contextname}';
 $string['monetizationsettings'] = 'Web monetization';
 $string['paymentpointer'] = 'Payment pointer';
 $string['pluginname'] = 'Web monetization';
+$string['receiptverifiertype'] = 'Receipt verifier';
+$string['receiptverifiertype_desc'] = 'Choose which receipt verifier you wish to use, none will disable receipt verification, internal will use the plugin\'s internal verifier, external will let you specify a stand alone receipt verifier. ';
 $string['systempaymentpointer'] = 'Default payment pointer';
 $string['systempaymentpointer_desc'] = 'This payment pointer will be set at the system context.';
+$string['systemforcepayment'] = 'Force payment (Default)';
+$string['systemforcepayment_desc'] = 'Require the user to be using a web monetized browser.';
+$string['webmonetization:ignoreforcepayment'] = 'Ignore force payment setting';
 $string['webmonetization:managepaymentpointers'] = 'Manage payment pointers';

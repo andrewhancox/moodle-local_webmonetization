@@ -41,7 +41,43 @@ if ($hassiteconfig) {
             '',
             PARAM_TEXT
     );
+    $monetizationsettings->add($setting);
+
+    $setting = new admin_setting_configcheckbox('local_webmonetization/systemforcepayment',
+            new lang_string('systemforcepayment', 'local_webmonetization'),
+            new lang_string('systemforcepayment_desc', 'local_webmonetization'),
+            false,
+            PARAM_TEXT
+    );
     $setting->set_updatedcallback('local_webmonetization_update_systempaymentpointer');
+    $monetizationsettings->add($setting);
+
+    $options = array(
+            '' => new lang_string('none'),
+            'internal' => new lang_string('internal', 'local_webmonetization'),
+            'external' => new lang_string('external', 'local_webmonetization')
+    );
+    $setting = new admin_setting_configselect('local_webmonetization/receiptverifiertype',
+            new lang_string('receiptverifiertype', 'local_webmonetization'),
+            new lang_string('receiptverifiertype_desc', 'local_webmonetization'),
+            1,
+            $options);
+    $monetizationsettings->add($setting);
+
+    $setting = new admin_setting_configtext('local_webmonetization/externalreceiptverifier',
+            new lang_string('externalreceiptverifier', 'local_webmonetization'),
+            new lang_string('externalreceiptverifier_desc', 'local_webmonetization'),
+            '',
+            PARAM_TEXT
+    );
+    $monetizationsettings->add($setting);
+
+    $setting = new admin_setting_configtext('local_webmonetization/externalreceiptverifierverifyendpoint',
+            new lang_string('externalreceiptverifierverifyendpoint', 'local_webmonetization'),
+            new lang_string('externalreceiptverifierverifyendpoint_desc', 'local_webmonetization'),
+            '',
+            PARAM_TEXT
+    );
     $monetizationsettings->add($setting);
 
     $ADMIN->add('localplugins', $monetizationsettings);

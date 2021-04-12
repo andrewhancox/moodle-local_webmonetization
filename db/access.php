@@ -32,4 +32,9 @@ $capabilities = array(
         'captype'      => 'write',
         'contextlevel' => CONTEXT_COURSE,
     ),
+    'local/webmonetization:ignoreforcepayment' => array(
+        'riskbitmask'  => RISK_CONFIG,
+        'captype'      => 'read',
+        'contextlevel' => CONTEXT_SYSTEM,
+    ),
 );
