@@ -43,8 +43,14 @@ switch ($context->contextlevel) {
         $PAGE->set_pagelayout('incourse');
         $PAGE->set_course(get_course($context->instanceid));
         break;
+    case CONTEXT_MODULE:
+        list($course, $cm) = get_course_and_cm_from_cmid($context->instanceid);
+        $PAGE->set_pagelayout('incourse');
+        $PAGE->set_cm($cm);
+        break;
     default:
         $PAGE->set_pagelayout('admin');
+        break;
 }
 
 $pagetitle = get_string('managepaymentpointerincontext', 'local_webmonetization',
