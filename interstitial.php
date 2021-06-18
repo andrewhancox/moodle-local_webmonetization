@@ -9,8 +9,9 @@ $contextid = required_param('contextid', PARAM_INT);
 
 $url = new moodle_url('/local/webmonetization/failed.php', ['contextid' => $contextid]);
 $PAGE->set_url($url);
-$PAGE->set_context(context::instance_by_id($contextid));
-
+$context = context::instance_by_id($contextid);
+$PAGE->set_context($context);
+$PAGE->set_course(get_course($context->get_course_context()->instanceid));
 
 echo $OUTPUT->header();
 echo html_writer::tag('h1', 'TRYING');
