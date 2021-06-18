@@ -60,7 +60,7 @@ class contextpaymentpointer extends persistent {
 
         $contextids = $context->get_parent_context_ids(true);
         list($sql, $params) = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
-        $pointers = self::get_records_select("contextid $sql", $params);
+        $pointers = self::get_records_select("contextid $sql", $params, 'contextid desc');
 
         if (!$pointers) {
             return false;
