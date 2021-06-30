@@ -26,6 +26,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
+$string['checkingbrowser'] = 'Checking browser for web monetization';
 $string['cachedef_paymentstreams'] = 'Payment streams';
 $string['enable'] = 'Enable';
 $string['enable_desc'] = 'Embed payment pointers on pages where one exists in the current context or one of it\'s parent contexts';
@@ -40,6 +41,7 @@ $string['internal'] = 'Internal';
 $string['managepaymentpointer'] = 'Manage payment pointer';
 $string['managepaymentpointerincontext'] = 'Manage payment pointer: {$a->contextname}';
 $string['monetizationsettings'] = 'Web monetization';
+$string['nonmonetizedbrowser'] = 'You need to access this content using a browser that supports Web Monetization, please visit <a href="https://coil.com">Coil</a> or <a href="https://webmonetization.org/#providers">Web Monetization</a> to find out more.';
 $string['paymentpointer'] = 'Payment pointer';
 $string['pluginname'] = 'Web monetization';
 $string['receiptverifiertype'] = 'Receipt verifier';

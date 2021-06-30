@@ -3,4 +3,4 @@
 
 require_once(__DIR__ . '/../../config.php');
 
-echo html_writer::tag('h1', 'NON MONETIZED BROWSER');
+redirect($CFG->wwwroot, get_string('nonmonetizedbrowser', 'local_webmonetization'), 0, \core\output\notification::NOTIFY_ERROR);

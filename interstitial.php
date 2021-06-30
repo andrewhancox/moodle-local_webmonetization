@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../../config.php');
 
 $contextid = required_param('contextid', PARAM_INT);
 
-$url = new moodle_url('/local/webmonetization/failed.php', ['contextid' => $contextid]);
+$url = new moodle_url('/local/webmonetization/interstitial.php', ['contextid' => $contextid]);
 $PAGE->set_url($url);
 $context = context::instance_by_id($contextid);
 $PAGE->set_context($context);
@@ -17,5 +17,5 @@ if (in_array($context->contextlevel, [CONTEXT_MODULE, CONTEXT_COURSE])) {
 }
 
 echo $OUTPUT->header();
-echo html_writer::tag('h1', 'TRYING');
+echo html_writer::tag('h1', get_string('checkingbrowser', 'local_webmonetization'));
 echo $OUTPUT->footer();
