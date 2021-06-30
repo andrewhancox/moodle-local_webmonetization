@@ -36,10 +36,13 @@ function local_webmonetization_before_standard_html_head() {
         return '';
     }
 
-    $monetizationsetuppage = in_array($PAGE->url->get_path(), [
-            '/local/webmonetization/failed.php',
-            '/local/webmonetization/interstitial.php'
-    ]);
+    $path = $PAGE->url->get_path();
+
+    if ($path == '/local/webmonetization/failed.php') {
+        return '';
+    }
+
+    $monetizationsetuppage = $path == '/local/webmonetization/interstitial.php';
 
     $paymentpointer = contextpaymentpointer::nearest_paymentpointer($PAGE->context);
 
