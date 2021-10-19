@@ -35,9 +35,9 @@ Signing up with [Coil](https://coil.com/) and installing one of their desktop br
 - [x] https://webmonetization.org/docs/receipt-verifier - https://github.com/coilhq/receipt-verifier
 - [x] Block access if no receipt
 - [x] Extend to system and course module contexts
-- [ ] Build proper interstitial and failed pages
-- [ ] Documentation
-- [ ] Get listed https://help.coil.com/docs/monetize/content/platforms
+- [x] Build proper interstitial and failed pages
+- [x] Documentation
+- [x] Get listed https://help.coil.com/docs/monetize/content/platforms
 
 Author
 ------
