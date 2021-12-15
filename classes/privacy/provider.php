@@ -24,10 +24,17 @@
  * @copyright 2021, Andrew Hancox
  */
 
-defined('MOODLE_INTERNAL') || die();
+namespace local_webmonetization\privacy;
 
-$plugin->version   = 2021121511;
-$plugin->requires  = 2020061503; // Moodle 2.9.
-$plugin->component = 'local_webmonetization';
-$plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = '0.1';
+defined('MOODLE_INTERNAL') || die;
+
+use core_privacy\local\metadata\null_provider;
+
+class provider implements null_provider {
+    /**
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}

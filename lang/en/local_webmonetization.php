@@ -44,6 +44,7 @@ $string['monetizationsettings'] = 'Web monetization';
 $string['nonmonetizedbrowser'] = 'You need to access this content using a browser that supports Web Monetization, please visit <a href="https://coil.com">Coil</a> or <a href="https://webmonetization.org/#providers">Web Monetization</a> to find out more.';
 $string['paymentpointer'] = 'Payment pointer';
 $string['pluginname'] = 'Web monetization';
+$string['privacy:metadata'] = 'The webmonetization plugin does not store or transmit any personal data.';
 $string['receiptverifiertype'] = 'Receipt verifier';
 $string['receiptverifiertype_desc'] = 'Choose which receipt verifier you wish to use, none will disable receipt verification, internal will use the plugin\'s internal verifier, external will let you specify a stand alone receipt verifier. ';
 $string['systempaymentpointer'] = 'Default payment pointer';
