@@ -73,7 +73,7 @@ if ($formdata = $form->get_data()) {
         $persistent->from_record($formdata);
         $persistent->create();
     } else {
-        $persistent = $this->get_persistent();
+        $persistent = $contextpaymentpointer;
         $persistent->from_record($formdata);
         $persistent->update();
     }
