@@ -60,7 +60,7 @@ if ($hassiteconfig) {
     $setting = new admin_setting_configselect('local_webmonetization/receiptverifiertype',
             new lang_string('receiptverifiertype', 'local_webmonetization'),
             new lang_string('receiptverifiertype_desc', 'local_webmonetization'),
-            1,
+            '',
             $options);
     $monetizationsettings->add($setting);
 

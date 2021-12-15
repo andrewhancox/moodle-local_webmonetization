@@ -98,6 +98,8 @@ abstract class receiptverifier {
                 return new \local_webmonetization\verifiers\internal();
             case "external":
                 return new \local_webmonetization\verifiers\external();
+            default:
+                return null;
         }
     }
 }
